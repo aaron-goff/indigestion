@@ -1,1 +1,0 @@
-import { IDigestHeader } from './generator';
