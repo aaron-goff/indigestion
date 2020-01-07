@@ -1,4 +1,4 @@
-export type DigestHeader = {
+export interface DigestHeader {
   realm: string;
   domain?: string;
   nonce: string;
@@ -6,4 +6,4 @@ export type DigestHeader = {
   stale?: string;
   algorithm?: string;
   qop?: string;
-};
+}

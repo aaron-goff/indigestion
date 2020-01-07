@@ -1,1 +1,1 @@
-import { generateDigestAuth, findNonceCount } from "./generator";
+import { findNonceCount, generateDigestAuth } from './generator';
