@@ -1,5 +1,5 @@
-import md5 = require("md5");
-import { digestHeader } from "../types/generator";
+import md5 = require('md5');
+import { DigestHeader } from '../types/generator';
 
 export function generateDigestAuth({
   authenticateHeader,
@@ -9,7 +9,7 @@ export function generateDigestAuth({
   method,
   cnonce,
   nc,
-  entityBody
+  entityBody,
 }: {
   authenticateHeader: string;
   username: string;
@@ -22,9 +22,9 @@ export function generateDigestAuth({
 }) {
   let digestOptions = parseHeaderForData(authenticateHeader);
 
-  if (!cnonce) cnonce = "";
+  if (!cnonce) cnonce = '';
 
-  if (!nc) nc = "00000000";
+  if (!nc) nc = '00000000';
   else {
     let ncDecimal = parseInt(nc, 16);
     ncDecimal += 1;
@@ -33,11 +33,11 @@ export function generateDigestAuth({
 
   let algorithm: string;
   if (digestOptions.algorithm) algorithm = digestOptions.algorithm;
-  else algorithm = "MD5";
+  else algorithm = 'MD5';
 
   let qop: string;
   if (digestOptions.qop) qop = digestOptions.qop;
-  else qop = "";
+  else qop = '';
 
   method = method.toUpperCase();
 
@@ -61,16 +61,14 @@ export function generateDigestAuth({
 }
 
 function parseHeaderForData(authenticateHeader: string) {
-  let headers: digestHeader = [
-    ...authenticateHeader.matchAll(
-      /(realm|domain|nonce|opaque|stale|algorithm|qop)="([^"]+)"/g
-    )
+  let headers: DigestHeader = [
+    ...authenticateHeader.matchAll(/(realm|domain|nonce|opaque|stale|algorithm|qop)="([^"]+)"/g),
   ].reduce(
     (acc, [, k, v]) => {
       acc[k] = v;
       return acc;
     },
-    { realm: "", nonce: "" }
+    { realm: '', nonce: '' },
   );
 
   return headers;
@@ -80,20 +78,18 @@ function generateA1Hash({
   digestOptions,
   username,
   password,
-  cnonce
+  cnonce,
 }: {
-  digestOptions: digestHeader;
+  digestOptions: DigestHeader;
   username: string;
   password: string;
   cnonce: string;
 }) {
   let a1: string;
-  if (!digestOptions.algorithm || digestOptions.algorithm === "MD5") {
+  if (!digestOptions.algorithm || digestOptions.algorithm === 'MD5') {
     a1 = md5(`${username}:${digestOptions.realm}:${password}`);
-  } else if (digestOptions.algorithm === "MD5-sess") {
-    a1 = md5(
-      `${username}:${digestOptions.realm}:${password}:${digestOptions.nonce}:${cnonce}`
-    );
+  } else if (digestOptions.algorithm === 'MD5-sess') {
+    a1 = md5(`${username}:${digestOptions.realm}:${password}:${digestOptions.nonce}:${cnonce}`);
   }
 
   return a1;
@@ -103,7 +99,7 @@ function generateA2Hash({
   qop,
   method,
   uri,
-  entityBody
+  entityBody,
 }: {
   qop: string;
   method: string;
@@ -111,9 +107,9 @@ function generateA2Hash({
   entityBody: string;
 }) {
   let a2: string;
-  if (qop === "auth" || qop === "") {
+  if (qop === 'auth' || qop === '') {
     a2 = md5(`${method}:${uri}`);
-  } else if (qop === "auth-int") {
+  } else if (qop === 'auth-int') {
     a2 = md5(`${method}:${uri}:${md5(entityBody)}`);
   }
 
@@ -125,9 +121,9 @@ function generateResponse({
   a1,
   a2,
   nc,
-  cnonce
+  cnonce,
 }: {
-  digestOptions: digestHeader;
+  digestOptions: DigestHeader;
   a1: string;
   a2: string;
   nc: string;
@@ -135,9 +131,7 @@ function generateResponse({
 }) {
   let response: string;
   if (digestOptions.qop) {
-    response = md5(
-      `${a1}:${digestOptions.nonce}:${nc}:${cnonce}:${digestOptions.qop}:${a2}`
-    );
+    response = md5(`${a1}:${digestOptions.nonce}:${nc}:${cnonce}:${digestOptions.qop}:${a2}`);
   } else {
     response = md5(`${a1}:${digestOptions.nonce}:${a2}`);
   }

@@ -1,4 +1,4 @@
-export type digestHeader = {
+export type DigestHeader = {
   realm: string;
   domain?: string;
   nonce: string;
