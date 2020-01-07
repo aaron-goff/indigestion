@@ -1,5 +1,5 @@
 import md5 = require('md5');
-import { DigestHeader } from '../types/generator';
+import { IDigestHeader } from '../types/generator';
 
 export function generateDigestAuth({
   authenticateHeader,
@@ -20,7 +20,7 @@ export function generateDigestAuth({
   nc?: string;
   entityBody?: string;
 }) {
-  let digestOptions = parseHeaderForData(authenticateHeader);
+  const digestOptions = parseHeaderForData(authenticateHeader);
 
   if (!cnonce) {
     cnonce = '';
@@ -70,7 +70,7 @@ export function generateDigestAuth({
 }
 
 function parseHeaderForData(authenticateHeader: string) {
-  const headers: DigestHeader = [
+  const headers: IDigestHeader = [
     ...authenticateHeader.matchAll(/(realm|domain|nonce|opaque|stale|algorithm|qop)="([^"]+)"/g),
   ].reduce(
     (acc, [, k, v]) => {
@@ -89,7 +89,7 @@ function generateA1Hash({
   password,
   cnonce,
 }: {
-  digestOptions: DigestHeader;
+  digestOptions: IDigestHeader;
   username: string;
   password: string;
   cnonce: string;
@@ -132,7 +132,7 @@ function generateResponse({
   nc,
   cnonce,
 }: {
-  digestOptions: DigestHeader;
+  digestOptions: IDigestHeader;
   a1: string;
   a2: string;
   nc: string;

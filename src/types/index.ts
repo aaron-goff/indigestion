@@ -1,1 +1,1 @@
-import { DigestHeader } from './generator';
+import { IDigestHeader } from './generator';

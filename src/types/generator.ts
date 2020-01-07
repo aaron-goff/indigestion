@@ -1,4 +1,4 @@
-export interface DigestHeader {
+export interface IDigestHeader {
   realm: string;
   domain?: string;
   nonce: string;
