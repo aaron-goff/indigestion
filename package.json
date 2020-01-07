@@ -5,7 +5,7 @@
   "main": "built/src/modules/index.js",
   "types": "built/src/types/index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha -r ts-node/register **/test/*.ts",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
