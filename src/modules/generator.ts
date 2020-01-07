@@ -22,28 +22,37 @@ export function generateDigestAuth({
 }) {
   let digestOptions = parseHeaderForData(authenticateHeader);
 
-  if (!cnonce) cnonce = '';
+  if (!cnonce) {
+    cnonce = '';
+  }
 
-  if (!nc) nc = '00000000';
-  else {
+  if (!nc) {
+    nc = '00000000';
+  } else {
     let ncDecimal = parseInt(nc, 16);
     ncDecimal += 1;
     nc = ncDecimal.toString(16);
   }
 
   let algorithm: string;
-  if (digestOptions.algorithm) algorithm = digestOptions.algorithm;
-  else algorithm = 'MD5';
+  if (digestOptions.algorithm) {
+    algorithm = digestOptions.algorithm;
+  } else {
+    algorithm = 'MD5';
+  }
 
   let qop: string;
-  if (digestOptions.qop) qop = digestOptions.qop;
-  else qop = '';
+  if (digestOptions.qop) {
+    qop = digestOptions.qop;
+  } else {
+    qop = '';
+  }
 
   method = method.toUpperCase();
 
-  let a1 = generateA1Hash({ digestOptions, username, password, cnonce });
-  let a2 = generateA2Hash({ qop, method, uri, entityBody });
-  let response = generateResponse({ digestOptions, a1, a2, nc, cnonce });
+  const a1 = generateA1Hash({ digestOptions, username, password, cnonce });
+  const a2 = generateA2Hash({ qop, method, uri, entityBody });
+  const response = generateResponse({ digestOptions, a1, a2, nc, cnonce });
 
   let header = `Digest username="${username}" realm="${digestOptions.realm}" nonce="${digestOptions.nonce}" uri="${uri}" algorithm="${algorithm}" `;
 
@@ -61,7 +70,7 @@ export function generateDigestAuth({
 }
 
 function parseHeaderForData(authenticateHeader: string) {
-  let headers: DigestHeader = [
+  const headers: DigestHeader = [
     ...authenticateHeader.matchAll(/(realm|domain|nonce|opaque|stale|algorithm|qop)="([^"]+)"/g),
   ].reduce(
     (acc, [, k, v]) => {
