@@ -1,0 +1,7 @@
+### If editing this file, did you consider if you should also update the .gitignore file? ###
+
+### Node modules ###
+node_modules
+
+### VSCode ###
+.vscode
