@@ -1,28 +1,51 @@
 {
-  "name": "digest-auth-generator",
+  "name": "indigestion",
   "version": "0.1.0",
   "description": "library to generate digest auth strings",
-  "main": "index.ts",
+  "main": "built/src/modules/index.js",
+  "types": "built/src/types/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaron-goff/indigestion.git"
   },
   "keywords": [
     "digest",
-    "authentication"
+    "authentication",
+    "auth",
+    "header"
   ],
   "engines": {
     "node": ">=12.0.0"
   },
   "author": "Aaron Goff <aaron@willowtreeapps.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@types/md5": "^2.1.33",
+    "md5": "^2.2.1"
+  },
+  "devDependencies": {
     "@types/mocha": "^5.2.7",
     "@types/typescript": "^2.0.0",
-    "match-all": "^1.2.5",
-    "md5": "^2.2.1",
     "mocha": "^7.0.0",
+    "prettier": "^1.19.1",
     "ts-node": "^8.5.4",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.7.4"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/aaron-goff/indigestion/issues"
+  },
+  "homepage": "https://github.com/aaron-goff/indigestion"
 }

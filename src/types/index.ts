@@ -1,0 +1,1 @@
+import { DigestHeader } from './generator';
