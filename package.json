@@ -2,8 +2,8 @@
   "name": "indigestion",
   "version": "0.1.0",
   "description": "library to generate digest auth strings",
-  "main": "built/src/modules/index.js",
-  "types": "built/src/types/index.js",
+  "main": "built/modules/index.js",
+  "types": "built/types/index.js",
   "scripts": {
     "test": "mocha -r ts-node/register **/test/*.ts",
     "build": "tsc",
