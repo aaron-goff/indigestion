@@ -9,6 +9,9 @@ node_modules
 ### Other ###
 src
 test
-tsconfig.json
+.circleci
+.github
 .prettierrc
+tsconfig.json
 tslint.json
+CODE_OF_CONDUCT.md
