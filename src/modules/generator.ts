@@ -64,7 +64,7 @@ export function generateDigestAuth({
     header += `opaque="${digestOptions.opaque}" `;
   }
 
-  header += `response=${response}`;
+  header += `response="${response}"`;
 
   return header;
 }
