@@ -31,6 +31,7 @@
   "author": "Aaron Goff <aaron@willowtreeapps.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^18.11.11",
     "md5": "^2.2.1"
   },
   "devDependencies": {
