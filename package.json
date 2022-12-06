@@ -1,6 +1,6 @@
 {
   "name": "indigestion",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "library to generate digest auth strings",
   "main": "built/modules/generator.js",
   "types": "built/modules/generator.d.ts",
