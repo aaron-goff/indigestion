@@ -8,7 +8,7 @@ export interface IDigestHeader {
   qop?: string;
 }
 
-export type ParamOptions = {
+export interface IParamOptions {
   authenticateHeader: string;
   username: string;
   password: string;
@@ -17,4 +17,4 @@ export type ParamOptions = {
   cnonce?: string;
   nc?: string;
   entityBody?: string;
-};
+}

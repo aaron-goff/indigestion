@@ -1,7 +1,7 @@
 import md5 = require('md5');
-import { IDigestHeader, ParamOptions } from '../types/generator';
+import { IDigestHeader, IParamOptions } from '../types/generator';
 
-export function generateDigestAuth(params: ParamOptions) {
+export function generateDigestAuth(params: IParamOptions) {
   const digestOptions = parseHeaderForData(params.authenticateHeader);
 
   const cnonce = params.cnonce ? params.cnonce : '';
@@ -22,12 +22,12 @@ export function generateDigestAuth(params: ParamOptions) {
 
   return buildHeader(
     {
-      username,
-      uri,
       algorithm,
-      nc,
       cnonce,
+      nc,
       response,
+      uri,
+      username,
     },
     digestOptions,
   );
