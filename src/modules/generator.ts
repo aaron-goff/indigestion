@@ -6,7 +6,7 @@ export function generateDigestAuth(params: IParamOptions) {
 
   const cnonce = params.cnonce ? params.cnonce : '';
 
-  const nc = params.nc ? parseInt(params.nc + 1, 16).toString(16) : '00000000';
+  const nc = params.nc ? (parseInt(params.nc, 16) + 1).toString(16) : '00000000';
 
   const algorithm = digestOptions.algorithm ? digestOptions.algorithm : 'MD5';
 
