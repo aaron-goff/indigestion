@@ -6,34 +6,45 @@ export function generateDigestAuth(params: ParamOptions) {
 
   const cnonce = params.cnonce ? params.cnonce : '';
 
-  const  nc = params.nc ? parseInt(params.nc + 1, 16).toString(16) : '00000000';
- 
-  const algorithm = digestOptions.algorithm ? digestOptions.algorithm : 'MD5'
+  const nc = params.nc ? parseInt(params.nc + 1, 16).toString(16) : '00000000';
+
+  const algorithm = digestOptions.algorithm ? digestOptions.algorithm : 'MD5';
 
   const qop = digestOptions.qop ? digestOptions.qop : '';
 
   const method = params.method.toUpperCase();
 
-  const {username, password, uri, entityBody } = params
+  const { username, password, uri, entityBody } = params;
 
   const a1 = generateA1Hash({ digestOptions, username, password, cnonce });
   const a2 = generateA2Hash({ qop, method, uri, entityBody });
   const response = generateResponse({ digestOptions, a1, a2, nc, cnonce });
 
-  return buildHeader({
-    username, uri, algorithm, nc, cnonce, response
-  }, digestOptions)
+  return buildHeader(
+    {
+      username,
+      uri,
+      algorithm,
+      nc,
+      cnonce,
+      response,
+    },
+    digestOptions,
+  );
 }
 
-function buildHeader(params: {
-  username: string,
-  uri: string,
-  algorithm: string
-  nc: string,
-  cnonce: string,
-  response: string
-}, digestOptions: IDigestHeader) {
-  const { username, uri, algorithm, nc, cnonce, response } = params
+function buildHeader(
+  params: {
+    username: string;
+    uri: string;
+    algorithm: string;
+    nc: string;
+    cnonce: string;
+    response: string;
+  },
+  digestOptions: IDigestHeader,
+) {
+  const { username, uri, algorithm, nc, cnonce, response } = params;
   let header = `Digest username="${username}" realm="${digestOptions.realm}" nonce="${digestOptions.nonce}" uri="${uri}" algorithm="${algorithm}" `;
 
   if (digestOptions.qop) {

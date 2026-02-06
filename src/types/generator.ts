@@ -9,12 +9,12 @@ export interface IDigestHeader {
 }
 
 export type ParamOptions = {
-  authenticateHeader: string,
-  username: string,
-  password: string,
-  uri: string,
-  method: string,
-  cnonce,
-  nc,
-  entityBody,
-}
+  authenticateHeader: string;
+  username: string;
+  password: string;
+  uri: string;
+  method: string;
+  cnonce?: string;
+  nc?: string;
+  entityBody?: string;
+};
