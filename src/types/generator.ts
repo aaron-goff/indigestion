@@ -7,3 +7,14 @@ export interface IDigestHeader {
   algorithm?: string;
   qop?: string;
 }
+
+export type ParamOptions = {
+  authenticateHeader: string,
+  username: string,
+  password: string,
+  uri: string,
+  method: string,
+  cnonce,
+  nc,
+  entityBody,
+}
