@@ -9,6 +9,6 @@
     "lib": ["es2020.string"],
     "skipLibCheck": true
   },
-  "include": ["./src/**/*", "./test/**/*", "index.ts"],
+  "include": ["./src/**/*", "index.ts"],
   "exclude": ["./node_modules"]
 }

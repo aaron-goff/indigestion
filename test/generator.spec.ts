@@ -40,30 +40,34 @@ describe('Generator tests', () => {
 
   it('Should Generate the Correct Digest Header if Nonce Count increases', () => {
     const expectedResponse = `Digest username="username" realm="realm" nonce="ce16c4a1092c8152f673edab4e56cbdc" uri="/uri" algorithm="MD5" qop=auth nc=1234abce cnonce="" response="238db766879fb1cd9d55d51cec507839"`;
-    const response = generator.generateDigestAuth({ ...defaultGenerateDigestAuthParams, nc: '1234ABCD' });
+    const nc = '1234ABCD';
+    const response = generator.generateDigestAuth({ ...defaultGenerateDigestAuthParams, nc });
 
     assert.deepEqual(response, expectedResponse, 'Expected response does not match actual response!');
   });
 
   it('Should Return the Correct Nonce Count', () => {
-    const response = generator.generateDigestAuth({ ...defaultGenerateDigestAuthParams, nc: '3456CBAF' });
+    const nc = '3456CBAF';
+    const response = generator.generateDigestAuth({ ...defaultGenerateDigestAuthParams, nc });
 
     const expectedNc = '3456CBB0';
-    const nc = generator.findNonceCount(response).toUpperCase();
+    const actualNc = generator.findNonceCount(response).toUpperCase();
 
-    assert.deepEqual(nc, expectedNc, 'Expected nonce count does not match actual nonce count');
+    assert.deepEqual(actualNc, expectedNc, 'Expected nonce count does not match actual nonce count');
   });
 
   it('Should Generate the Correct Digest Header if Client Nonce is provided', () => {
     const expectedResponse = `Digest username="username" realm="realm" nonce="ce16c4a1092c8152f673edab4e56cbdc" uri="/uri" algorithm="MD5" qop=auth nc=00000000 cnonce="ABCD1234" response="5ab953554a06aa8c22f54241f11585f9"`;
-    const response = generator.generateDigestAuth({ ...defaultGenerateDigestAuthParams, cnonce: 'ABCD1234' });
+    const cnonce = 'ABCD1234';
+    const response = generator.generateDigestAuth({ ...defaultGenerateDigestAuthParams, cnonce });
 
     assert.deepEqual(response, expectedResponse, 'Expected response does not match actual response!');
   });
 
   it('Should Generate the Correct Digest Header if Method is lowercase', () => {
     const expectedResponse = `Digest username="username" realm="realm" nonce="ce16c4a1092c8152f673edab4e56cbdc" uri="/uri" algorithm="MD5" qop=auth nc=00000000 cnonce="" response="2251b33018e338aa337f7ab0236cd106"`;
-    const response = generator.generateDigestAuth({ ...defaultGenerateDigestAuthParams, method: 'get' });
+    const method = 'get';
+    const response = generator.generateDigestAuth({ ...defaultGenerateDigestAuthParams, method });
 
     assert.deepEqual(response, expectedResponse, 'Expected response does not match actual response!');
   });
@@ -88,10 +92,11 @@ describe('Generator tests', () => {
   it('Should Generate the Correct Digest Header if qop is auth-int', () => {
     const expectedResponse = `Digest username="username" realm="realm" nonce="ce16c4a1092c8152f673edab4e56cbdc" uri="/uri" algorithm="MD5" qop=auth-int nc=00000000 cnonce="" response="04f863229e7ea0b17120ab0ef97e4649"`;
     const authenticateHeader = `Digest qop="auth-int", realm="${realm}", nonce="${nonce}"`;
+    const entityBody = 'This is the entity body';
     const response = generator.generateDigestAuth({
       ...defaultGenerateDigestAuthParams,
       authenticateHeader,
-      entityBody: 'This is the entity body',
+      entityBody,
     });
 
     assert.deepEqual(response, expectedResponse, 'Expected response does not match actual response!');
