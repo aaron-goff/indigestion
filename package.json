@@ -39,25 +39,27 @@
     "@types/mocha": "^5.2.7",
     "eslint": "^9.39.2",
     "husky": "^9.1.7",
+    "jiti": "^2.6.1",
     "lint-staged": "^16.2.7",
     "mocha": "^11.3.0",
     "prettier": "^1.19.1",
     "ts-node": "^8.10.2",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.9.7"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.54.0"
   },
   "bugs": {
     "url": "https://github.com/aaron-goff/indigestion/issues"
   },
   "homepage": "https://github.com/aaron-goff/indigestion",
   "lint-staged": {
-  "**/*.{js,jsx,ts,tsx}": [
-    "eslint --quiet --fix",
-    "prettier --write"
-  ],
-  "**/*.{json,css,md}": [
-    "prettier --write"
-  ]
-}
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --quiet --fix",
+      "prettier --write"
+    ],
+    "**/*.{json,css,md}": [
+      "prettier --write"
+    ]
+  }
 }

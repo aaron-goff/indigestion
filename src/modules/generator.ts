@@ -1,4 +1,4 @@
-import md5 = require('md5');
+import * as md5 from 'md5';
 import { IDigestHeader, IParamOptions } from '../types/generator';
 
 export function generateDigestAuth(params: IParamOptions) {
