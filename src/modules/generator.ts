@@ -1,59 +1,50 @@
-import md5 = require('md5');
-import { IDigestHeader } from '../types/generator';
+import * as md5 from 'md5';
+import { IDigestHeader, IParamOptions } from '../types/generator';
 
-export function generateDigestAuth({
-  authenticateHeader,
-  username,
-  password,
-  uri,
-  method,
-  cnonce,
-  nc,
-  entityBody,
-}: {
-  authenticateHeader: string;
-  username: string;
-  password: string;
-  uri: string;
-  method: string;
-  cnonce?: string;
-  nc?: string;
-  entityBody?: string;
-}) {
-  const digestOptions = parseHeaderForData(authenticateHeader);
+export function generateDigestAuth(params: IParamOptions) {
+  const digestOptions = parseHeaderForData(params.authenticateHeader);
 
-  if (!cnonce) {
-    cnonce = '';
-  }
+  const cnonce = params.cnonce ? params.cnonce : '';
 
-  if (!nc) {
-    nc = '00000000';
-  } else {
-    let ncDecimal = parseInt(nc, 16);
-    ncDecimal += 1;
-    nc = ncDecimal.toString(16);
-  }
+  const nc = params.nc ? (parseInt(params.nc, 16) + 1).toString(16) : '00000000';
 
-  let algorithm: string;
-  if (digestOptions.algorithm) {
-    algorithm = digestOptions.algorithm;
-  } else {
-    algorithm = 'MD5';
-  }
+  const algorithm = digestOptions.algorithm ? digestOptions.algorithm : 'MD5';
 
-  let qop: string;
-  if (digestOptions.qop) {
-    qop = digestOptions.qop;
-  } else {
-    qop = '';
-  }
+  const qop = digestOptions.qop ? digestOptions.qop : '';
 
-  method = method.toUpperCase();
+  const method = params.method.toUpperCase();
+
+  const { username, password, uri, entityBody } = params;
 
   const a1 = generateA1Hash({ digestOptions, username, password, cnonce });
   const a2 = generateA2Hash({ qop, method, uri, entityBody });
   const response = generateResponse({ digestOptions, a1, a2, nc, cnonce });
 
+  return buildHeader(
+    {
+      algorithm,
+      cnonce,
+      nc,
+      response,
+      uri,
+      username,
+    },
+    digestOptions,
+  );
+}
+
+function buildHeader(
+  params: {
+    username: string;
+    uri: string;
+    algorithm: string;
+    nc: string;
+    cnonce: string;
+    response: string;
+  },
+  digestOptions: IDigestHeader,
+) {
+  const { username, uri, algorithm, nc, cnonce, response } = params;
   let header = `Digest username="${username}" realm="${digestOptions.realm}" nonce="${digestOptions.nonce}" uri="${uri}" algorithm="${algorithm}" `;
 
   if (digestOptions.qop) {

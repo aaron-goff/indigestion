@@ -9,8 +9,8 @@ node_modules
 ### Other ###
 src
 test
-.circleci
 .github
+.husky
 .prettierrc
 tsconfig.json
 tslint.json

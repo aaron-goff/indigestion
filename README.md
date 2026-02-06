@@ -2,7 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/indigestion.svg?style=plastic)](https://www.npmjs.org/package/indigestion)
 [![node version](https://img.shields.io/node/v/indigestion?style=plastic&color=blue)](https://www.npmjs.org/package/indigestion)
-[![CircleCI](https://circleci.com/gh/aaron-goff/indigestion/tree/master.svg?style=svg)](https://circleci.com/gh/aaron-goff/indigestion/tree/master)
 [![install size](https://packagephobia.now.sh/badge?p=indigestion)](https://packagephobia.now.sh/result?p=indigestion)
 
 Digest Authentication header generator. Takes the `www-authenticate` header response and returns the `Digest...` header as a string.
@@ -114,7 +113,3 @@ return new Promise((resolve, reject) => {
   - `opaque` is significant and provided by `www-authenticate` header
   - `cnonce` is signficant and provided by `www-authenticate` header
   - `algorithm` is specified as `md5` or `md5-sess`
-
-```
-
-```

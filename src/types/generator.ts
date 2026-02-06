@@ -7,3 +7,14 @@ export interface IDigestHeader {
   algorithm?: string;
   qop?: string;
 }
+
+export interface IParamOptions {
+  authenticateHeader: string;
+  username: string;
+  password: string;
+  uri: string;
+  method: string;
+  cnonce?: string;
+  nc?: string;
+  entityBody?: string;
+}
