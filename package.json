@@ -1,6 +1,6 @@
 {
   "name": "indigestion",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "library to generate digest auth strings",
   "main": "built/modules/generator.js",
   "types": "built/modules/generator.d.ts",
@@ -43,7 +43,7 @@
     "lint-staged": "^16.2.7",
     "mocha": "^11.3.0",
     "prettier": "^3.8.1",
-    "ts-node": "^8.10.2",
+    "ts-node": "^10.9.2",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^5.9.3",
