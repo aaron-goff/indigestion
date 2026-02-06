@@ -5,9 +5,9 @@
   "main": "built/modules/generator.js",
   "types": "built/modules/generator.d.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register **/test/*.ts",
+    "test": "mocha -r ts-node/register **/test/*spec*",
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\" \"test/**/*.ts\" \"test/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "husky && npm run build",
     "prepublishOnly": "npm test && npm run lint",
@@ -31,7 +31,7 @@
   "author": "Aaron Goff <ajgoff@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@types/node": "^18.11.11",
+    "@types/node": "^25.2.1",
     "md5": "^2.2.1"
   },
   "devDependencies": {
