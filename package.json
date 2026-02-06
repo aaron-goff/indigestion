@@ -38,6 +38,7 @@
   "devDependencies": {
     "@types/md5": "^2.2.0",
     "@types/mocha": "^5.2.7",
+    "conventional-changelog-eslint": "^6.0.0",
     "eslint": "^9.39.2",
     "husky": "^9.1.7",
     "jiti": "^2.6.1",
@@ -62,5 +63,8 @@
     "**/*.{json,css,md}": [
       "prettier --write"
     ]
+  },
+  "release": {
+    "preset": "eslint"
   }
 }
