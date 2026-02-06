@@ -52,11 +52,11 @@
   },
   "homepage": "https://github.com/aaron-goff/indigestion",
   "lint-staged": {
-  "*.{js,jsx,ts,tsx}": [
+  "**/*.{js,jsx,ts,tsx}": [
     "eslint --quiet --fix",
     "prettier --write"
   ],
-  "*.{json,css,md}": [
+  "**/*.{json,css,md}": [
     "prettier --write"
   ]
 }
