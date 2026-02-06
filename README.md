@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/indigestion.svg?style=plastic)](https://www.npmjs.org/package/indigestion)
 [![node version](https://img.shields.io/node/v/indigestion?style=plastic&color=blue)](https://www.npmjs.org/package/indigestion)
 [![install size](https://packagephobia.now.sh/badge?p=indigestion)](https://packagephobia.now.sh/result?p=indigestion)
-[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+[![semantic-release: eslint](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 Digest Authentication header generator. Takes the `www-authenticate` header response and returns the `Digest...` header as a string.
 
