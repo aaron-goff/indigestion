@@ -1,5 +1,5 @@
 import * as generator from '../src/modules/generator';
-import assert = require('assert');
+import * as assert from 'assert'
 
 describe('Generator tests', () => {
   const username = 'username';
